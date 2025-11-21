@@ -1,0 +1,79 @@
+# Build artifacts
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+
+# Test results, coverage
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+*.trx
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# JetBrains Rider caches
+.idea/
+*.dotCover
+
+# Azure Pipelines
+.azure-pipelines/
+
+# Roslyn generated files
+**/GeneratedInternalTypeHelper.g.cs
+
+# VS Build pipeline
+*.vsix
+
+# User-specific files
+*.userprefs
+
+# Temporary files
+*~
+*.tmp
+
+# Local secrets
+secrets.json
+appsettings.Development.json
+
+# Ignore compiled global tools
+.tools/
+
+# Ignore package restore and local build artifacts
+**/bin/
+**/obj/
+
+# Ignore NuGet packages folder for the solution
+packages/
+
+# Ignore test result folders in test projects
+**/TestResults/
+
+# Preserve gitignore in subprojects
+!/.gitignore
