@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, Mediator, Observer, State, and Memento patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, Mediator, Observer, State, Strategy, and Memento patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -22,6 +22,7 @@ Projects
   - Mediator implementation: `DesignPatterns/Mediator/*`
   - Observer implementation: `DesignPatterns/Observer/*`
   - State implementation: `DesignPatterns/State/*`
+  - Strategy implementation: `DesignPatterns/Strategy/*`
   - Memento implementation: `DesignPatterns/Memento/*`
 - `Tests` - xUnit tests covering the examples.
 
@@ -249,6 +250,19 @@ Included patterns and brief docs
     doc.Edit("Edit after published"); // moves back to Draft and updates content
     ```
 
+- Strategy Pattern
+  - Purpose: Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
+  - Example: `DesignPatterns/Strategy/*` contains `ISortStrategy`, concrete strategies `BubbleSortStrategy`, `QuickSortStrategy`, and `Sorter` that switches strategies at runtime.
+  - Usage snippet:
+
+    ```csharp
+    var data = new[] { 5, 3, 8, 1, 4 };
+    var sorter = new Sorter(new BubbleSortStrategy());
+    var sorted = sorter.Sort(data);
+    sorter.SetStrategy(new QuickSortStrategy());
+    sorted = sorter.Sort(data);
+    ```
+
 - Memento Pattern
   - Purpose: Capture and externalize an object's internal state so it can be restored later without violating encapsulation.
   - Example: `DesignPatterns/Memento/*` contains `TextMemento`, `TextEditor` (originator), and `CareTaker` that stores mementos.
@@ -283,6 +297,7 @@ Tests
   - Mediator tests: `Tests/MediatorTests.cs`
   - Observer tests: `Tests/ObserverTests.cs`
   - State tests: `Tests/StateTests.cs`
+  - Strategy tests: `Tests/StrategyTests.cs`
   - Memento tests: `Tests/MementoTests.cs`
 
 Common commands

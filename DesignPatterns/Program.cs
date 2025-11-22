@@ -16,6 +16,7 @@ using DesignPatterns.Mediator;
 using DesignPatterns.Memento;
 using DesignPatterns.Observer;
 using DesignPatterns.State;
+using DesignPatterns.Strategy;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -206,6 +207,20 @@ Console.WriteLine($"After publish to published: state: {doc.StateName}");
 // Edit published -> goes back to draft
 doc.Edit("Updated after published");
 Console.WriteLine($"After editing published: state: {doc.StateName}, content: {doc.Content}");
+
+// Strategy demo
+Console.WriteLine();
+Console.WriteLine("Strategy pattern demo:");
+var data = new[] { 5, 3, 8, 1, 4 };
+var sorter = new Sorter(new BubbleSortStrategy());
+Console.WriteLine($"Current strategy: {sorter.StrategyName}");
+var sorted = sorter.Sort(data);
+Console.WriteLine("Sorted: " + string.Join(", ", sorted));
+
+sorter.SetStrategy(new QuickSortStrategy());
+Console.WriteLine($"Current strategy: {sorter.StrategyName}");
+sorted = sorter.Sort(data);
+Console.WriteLine("Sorted: " + string.Join(", ", sorted));
 
 // Memento demo
 Console.WriteLine();
