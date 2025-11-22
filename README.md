@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, Mediator, Observer, State, Strategy, and Memento patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, Mediator, Observer, State, Strategy, Template Method, and Memento patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -23,6 +23,7 @@ Projects
   - Observer implementation: `DesignPatterns/Observer/*`
   - State implementation: `DesignPatterns/State/*`
   - Strategy implementation: `DesignPatterns/Strategy/*`
+  - Template Method implementation: `DesignPatterns/TemplateMethod/*`
   - Memento implementation: `DesignPatterns/Memento/*`
 - `Tests` - xUnit tests covering the examples.
 
@@ -277,6 +278,19 @@ Included patterns and brief docs
     editor.Restore(caretaker.PopState());
     ```
 
+- Template Method Pattern
+  - Purpose: Define the skeleton of an algorithm in a base class and let subclasses override specific steps without changing the algorithm's structure.
+  - Example: `DesignPatterns/TemplateMethod/*` contains `Report` (base class) and concrete reports `SalesReport` and `InventoryReport` that implement the specific steps.
+  - Usage snippet:
+
+    ```csharp
+    var sales = new SalesReport();
+    Console.WriteLine(sales.GenerateReport());
+
+    var inv = new InventoryReport();
+    Console.WriteLine(inv.GenerateReport());
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -299,6 +313,7 @@ Tests
   - State tests: `Tests/StateTests.cs`
   - Strategy tests: `Tests/StrategyTests.cs`
   - Memento tests: `Tests/MementoTests.cs`
+  - Template Method tests: `Tests/TemplateMethodTests.cs`
 
 Common commands
 - Build solution: `dotnet build`

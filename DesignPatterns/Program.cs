@@ -17,6 +17,7 @@ using DesignPatterns.Memento;
 using DesignPatterns.Observer;
 using DesignPatterns.State;
 using DesignPatterns.Strategy;
+using DesignPatterns.TemplateMethod;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -221,6 +222,14 @@ sorter.SetStrategy(new QuickSortStrategy());
 Console.WriteLine($"Current strategy: {sorter.StrategyName}");
 sorted = sorter.Sort(data);
 Console.WriteLine("Sorted: " + string.Join(", ", sorted));
+
+// Template Method demo
+Console.WriteLine();
+Console.WriteLine("Template Method pattern demo:");
+var salesReport = new SalesReport();
+Console.WriteLine(salesReport.GenerateReport());
+var inventoryReport = new InventoryReport();
+Console.WriteLine(inventoryReport.GenerateReport());
 
 // Memento demo
 Console.WriteLine();
