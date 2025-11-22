@@ -3,13 +3,14 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, and Adapter patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, and Bridge patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
   - Prototype implementation: `DesignPatterns/Prototype/Person.cs` and `DesignPatterns/Prototype/Address.cs`
   - Abstract Factory implementation: `DesignPatterns/AbstractFactory/*`
   - Adapter implementation: `DesignPatterns/Adapter/*`
+  - Bridge implementation: `DesignPatterns/Bridge/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -79,6 +80,19 @@ Included patterns and brief docs
     Console.WriteLine(provider.GetText());
     ```
 
+- Bridge Pattern
+  - Purpose: Decouple an abstraction from its implementation so the two can vary independently.
+  - Example: `DesignPatterns/Bridge/*` provides `IDevice` implementations (`Tv`, `Radio`) and abstractions (`RemoteControl`, `AdvancedRemote`).
+  - Usage snippet:
+
+    ```csharp
+    var tv = new Tv();
+    var remote = new RemoteControl(tv);
+    remote.TogglePower();
+    remote.VolumeUp();
+    remote.SetChannel(10);
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -87,6 +101,7 @@ Tests
   - Prototype tests: `Tests/PrototypeTests.cs`
   - Abstract Factory tests: `Tests/AbstractFactoryTests.cs`
   - Adapter tests: `Tests/AdapterTests.cs`
+  - Bridge tests: `Tests/BridgeTests.cs`
 
 Requirements
 - .NET 10 SDK

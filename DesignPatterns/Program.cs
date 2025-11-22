@@ -4,6 +4,7 @@ using DesignPatterns.Builder;
 using DesignPatterns.Prototype;
 using DesignPatterns.AbstractFactory;
 using DesignPatterns.Adapter;
+using DesignPatterns.Bridge;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -58,6 +59,22 @@ Console.WriteLine("Adapter pattern demo:");
 var legacy = new LegacyTextService();
 ITextProvider provider = new LegacyTextAdapter(legacy);
 Console.WriteLine(provider.GetText());
+
+// Bridge demo
+Console.WriteLine();
+Console.WriteLine("Bridge pattern demo:");
+var tv = new Tv();
+var remote = new RemoteControl(tv);
+remote.TogglePower();
+remote.VolumeUp();
+remote.SetChannel(10);
+Console.WriteLine($"TV - Enabled: {tv.IsEnabled}, Volume: {tv.Volume}, Channel: {tv.Channel}");
+
+var radio = new Radio();
+var adv = new AdvancedRemote(radio);
+adv.VolumeUp();
+adv.Mute();
+Console.WriteLine($"Radio - Enabled: {radio.IsEnabled}, Volume: {radio.Volume}, Channel: {radio.Channel}");
 
 // Singleton demo
 Logger.Instance.Clear();
