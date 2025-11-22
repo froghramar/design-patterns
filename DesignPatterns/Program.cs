@@ -66,6 +66,7 @@ var legacy = new LegacyTextService();
 ITextProvider provider = new LegacyTextAdapter(legacy);
 Console.WriteLine(provider.GetText());
 
+
 // Bridge demo
 Console.WriteLine();
 Console.WriteLine("Bridge pattern demo:");
@@ -109,6 +110,28 @@ h1.SetNext(h2).SetNext(def);
 Console.WriteLine(h1.Handle(new Request(1, "r1")));
 Console.WriteLine(h1.Handle(new Request(2, "r2")));
 Console.WriteLine(h1.Handle(new Request(99, "r3")));
+
+// Command demo
+Console.WriteLine();
+Console.WriteLine("Command pattern demo:");
+var light = new DesignPatterns.Command.Light();
+var lightOn = new DesignPatterns.Command.LightOnCommand(light);
+var lightOff = new DesignPatterns.Command.LightOffCommand(light);
+var cmdRemote = new DesignPatterns.Command.RemoteControl();
+
+cmdRemote.SetCommand(lightOn);
+cmdRemote.PressButton();
+Console.WriteLine($"Light is on: {light.IsOn}");
+
+cmdRemote.SetCommand(lightOff);
+cmdRemote.PressButton();
+Console.WriteLine($"Light is on: {light.IsOn}");
+
+// demonstrate undo
+cmdRemote.SetCommand(lightOn);
+cmdRemote.PressButton();
+cmdRemote.PressUndo();
+Console.WriteLine($"After undo, light is on: {light.IsOn}");
 
 // Decorator demo
 Console.WriteLine();

@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, and Chain of Responsibility patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, and Command patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -17,6 +17,7 @@ Projects
   - Flyweight implementation: `DesignPatterns/Flyweight/*`
   - Proxy implementation: `DesignPatterns/Proxy/*`
   - Chain of Responsibility implementation: `DesignPatterns/Chain/*`
+  - Command implementation: `DesignPatterns/Command/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -173,6 +174,20 @@ Included patterns and brief docs
     Console.WriteLine(h1.Handle(new Request(99, "r3")));
     ```
 
+- Command Pattern
+  - Purpose: Encapsulate a request as an object, thereby letting you parameterize clients with queues, requests, and operations and support undoable operations.
+  - Example: `DesignPatterns/Command/*` contains `ICommand`, `Light`, `LightOnCommand`, `LightOffCommand`, and `RemoteControl` (invoker).
+  - Usage snippet:
+
+    ```csharp
+    var light = new Light();
+    var on = new LightOnCommand(light);
+    var remote = new RemoteControl();
+    remote.SetCommand(on);
+    remote.PressButton();
+    remote.PressUndo();
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -188,6 +203,7 @@ Tests
   - Flyweight tests: `Tests/FlyweightTests.cs`
   - Proxy tests: `Tests/ProxyTests.cs`
   - Chain tests: `Tests/ChainTests.cs`
+  - Command tests: `Tests/CommandTests.cs`
 
 Common commands
 - Build solution: `dotnet build`
