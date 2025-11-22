@@ -1,6 +1,7 @@
 ﻿using DesignPatterns.Factories;
 using DesignPatterns.Singleton;
 using DesignPatterns.Builder;
+using DesignPatterns.Prototype;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -23,6 +24,16 @@ var house = new HouseBuilder()
 Console.WriteLine();
 Console.WriteLine("Builder pattern demo:");
 Console.WriteLine(house.ToString());
+
+// Prototype demo
+var person = new Person("Alice", 30, new Address("1 A St", "Townsville"));
+var clone = person.Clone();
+clone.Address.Street = "2 B Ave"; // modify clone's address to demonstrate deep copy
+
+Console.WriteLine();
+Console.WriteLine("Prototype pattern demo:");
+Console.WriteLine($"Original: {person}");
+Console.WriteLine($"Clone:    {clone}");
 
 // Singleton demo
 Logger.Instance.Clear();
