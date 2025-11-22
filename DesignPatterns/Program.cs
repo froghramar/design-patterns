@@ -18,6 +18,7 @@ using DesignPatterns.Observer;
 using DesignPatterns.State;
 using DesignPatterns.Strategy;
 using DesignPatterns.TemplateMethod;
+using DesignPatterns.Visitor;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -89,7 +90,6 @@ var adv = new AdvancedRemote(radio);
 adv.VolumeUp();
 adv.Mute();
 Console.WriteLine($"Radio - Enabled: {radio.IsEnabled}, Volume: {radio.Volume}, Channel: {radio.Channel}");
-
 // Composite demo
 Console.WriteLine();
 Console.WriteLine("Composite pattern demo:");
@@ -311,3 +311,17 @@ foreach (var msg in Logger.Instance.Messages)
 {
     Console.WriteLine(msg);
 }
+
+// Visitor demo
+Console.WriteLine();
+Console.WriteLine("Visitor pattern demo:");
+var structure = new ObjectStructure();
+structure.Add(new ElementA("alpha"));
+structure.Add(new ElementB(42));
+structure.Add(new ElementA("beta"));
+
+var visitor = new ConcreteVisitor();
+structure.Accept(visitor);
+
+Console.WriteLine("Visitor log:");
+foreach (var l in visitor.Log) Console.WriteLine(l);

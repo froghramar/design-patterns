@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, Mediator, Observer, State, Strategy, Template Method, and Memento patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, Mediator, Observer, State, Strategy, Template Method, Memento, and Visitor patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -25,6 +25,7 @@ Projects
   - Strategy implementation: `DesignPatterns/Strategy/*`
   - Template Method implementation: `DesignPatterns/TemplateMethod/*`
   - Memento implementation: `DesignPatterns/Memento/*`
+  - Visitor implementation: `DesignPatterns/Visitor/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -291,6 +292,20 @@ Included patterns and brief docs
     Console.WriteLine(inv.GenerateReport());
     ```
 
+- Visitor Pattern
+  - Purpose: Let you define a new operation without changing the classes of the elements on which it operates. Visitor separates an algorithm from the object structure it operates on.
+  - Example: `DesignPatterns/Visitor/*` contains `IVisitor`, element types `ElementA`, `ElementB`, a `ConcreteVisitor` that logs visits, and `ObjectStructure` which holds elements and accepts a visitor.
+  - Usage snippet:
+
+    ```csharp
+    var structure = new ObjectStructure();
+    structure.Add(new ElementA("alpha"));
+    structure.Add(new ElementB(42));
+    var visitor = new ConcreteVisitor();
+    structure.Accept(visitor);
+    Console.WriteLine(string.Join("\n", visitor.Log));
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -314,6 +329,7 @@ Tests
   - Strategy tests: `Tests/StrategyTests.cs`
   - Memento tests: `Tests/MementoTests.cs`
   - Template Method tests: `Tests/TemplateMethodTests.cs`
+  - Visitor tests: `Tests/VisitorTests.cs`
 
 Common commands
 - Build solution: `dotnet build`
