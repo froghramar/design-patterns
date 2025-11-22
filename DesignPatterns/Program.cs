@@ -10,6 +10,7 @@ using DesignPatterns.Decorator;
 using DesignPatterns.Facade;
 using DesignPatterns.Flyweight;
 using DesignPatterns.Proxy;
+using DesignPatterns.Chain;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -95,7 +96,19 @@ child.Add(new Dot());
 nested.Add(child);
 nested.Add(new CircleGraphic());
 Console.WriteLine(nested.Draw());
-;
+
+
+// Chain of Responsibility demo
+Console.WriteLine();
+Console.WriteLine("Chain of Responsibility pattern demo:");
+var h1 = new LevelOneHandler();
+var h2 = new LevelTwoHandler();
+var def = new DefaultHandler();
+h1.SetNext(h2).SetNext(def);
+
+Console.WriteLine(h1.Handle(new Request(1, "r1")));
+Console.WriteLine(h1.Handle(new Request(2, "r2")));
+Console.WriteLine(h1.Handle(new Request(99, "r3")));
 
 // Decorator demo
 Console.WriteLine();

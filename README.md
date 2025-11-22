@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, and Proxy patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, and Chain of Responsibility patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -16,6 +16,7 @@ Projects
   - Facade implementation: `DesignPatterns/Facade/*`
   - Flyweight implementation: `DesignPatterns/Flyweight/*`
   - Proxy implementation: `DesignPatterns/Proxy/*`
+  - Chain of Responsibility implementation: `DesignPatterns/Chain/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -157,6 +158,21 @@ Included patterns and brief docs
     img.Display(); // reuses loaded image
     ```
 
+- Chain of Responsibility Pattern
+  - Purpose: Avoid coupling the sender of a request to its receiver by giving more than one object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it.
+  - Example: `DesignPatterns/Chain/*` contains handlers `LevelOneHandler`, `LevelTwoHandler`, and `DefaultHandler` that process requests of different levels.
+  - Usage snippet:
+
+    ```csharp
+    var h1 = new LevelOneHandler();
+    var h2 = new LevelTwoHandler();
+    var def = new DefaultHandler();
+    h1.SetNext(h2).SetNext(def);
+    Console.WriteLine(h1.Handle(new Request(1, "r1")));
+    Console.WriteLine(h1.Handle(new Request(2, "r2")));
+    Console.WriteLine(h1.Handle(new Request(99, "r3")));
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -171,6 +187,7 @@ Tests
   - Facade tests: `Tests/FacadeTests.cs`
   - Flyweight tests: `Tests/FlyweightTests.cs`
   - Proxy tests: `Tests/ProxyTests.cs`
+  - Chain tests: `Tests/ChainTests.cs`
 
 Common commands
 - Build solution: `dotnet build`
