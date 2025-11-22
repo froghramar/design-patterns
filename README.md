@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, and Bridge patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, and Composite patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -11,6 +11,7 @@ Projects
   - Abstract Factory implementation: `DesignPatterns/AbstractFactory/*`
   - Adapter implementation: `DesignPatterns/Adapter/*`
   - Bridge implementation: `DesignPatterns/Bridge/*`
+  - Composite implementation: `DesignPatterns/Composite/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -93,6 +94,18 @@ Included patterns and brief docs
     remote.SetChannel(10);
     ```
 
+- Composite Pattern
+  - Purpose: Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions uniformly.
+  - Example: `DesignPatterns/Composite/*` contains `IGraphic` (leaf `Dot`, `CircleGraphic`) and `CompositeGraphic` which aggregates children.
+  - Usage snippet:
+
+    ```csharp
+    var root = new CompositeGraphic();
+    root.Add(new Dot());
+    root.Add(new CircleGraphic());
+    Console.WriteLine(root.Draw()); // "Dot, Circle"
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -102,6 +115,7 @@ Tests
   - Abstract Factory tests: `Tests/AbstractFactoryTests.cs`
   - Adapter tests: `Tests/AdapterTests.cs`
   - Bridge tests: `Tests/BridgeTests.cs`
+  - Composite tests: `Tests/CompositeTests.cs`
 
 Requirements
 - .NET 10 SDK

@@ -5,6 +5,7 @@ using DesignPatterns.Prototype;
 using DesignPatterns.AbstractFactory;
 using DesignPatterns.Adapter;
 using DesignPatterns.Bridge;
+using DesignPatterns.Composite;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -75,6 +76,21 @@ var adv = new AdvancedRemote(radio);
 adv.VolumeUp();
 adv.Mute();
 Console.WriteLine($"Radio - Enabled: {radio.IsEnabled}, Volume: {radio.Volume}, Channel: {radio.Channel}");
+
+// Composite demo
+Console.WriteLine();
+Console.WriteLine("Composite pattern demo:");
+var root = new CompositeGraphic();
+root.Add(new Dot());
+root.Add(new CircleGraphic());
+Console.WriteLine(root.Draw());
+
+var nested = new CompositeGraphic();
+var child = new CompositeGraphic();
+child.Add(new Dot());
+nested.Add(child);
+nested.Add(new CircleGraphic());
+Console.WriteLine(nested.Draw());
 
 // Singleton demo
 Logger.Instance.Clear();
