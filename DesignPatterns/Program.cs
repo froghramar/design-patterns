@@ -15,6 +15,7 @@ using DesignPatterns.Iterator;
 using DesignPatterns.Mediator;
 using DesignPatterns.Memento;
 using DesignPatterns.Observer;
+using DesignPatterns.State;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -177,6 +178,34 @@ Console.WriteLine("SubA received:");
 foreach (var n in subA.Received) Console.WriteLine(n);
 Console.WriteLine("SubB received:");
 foreach (var n in subB.Received) Console.WriteLine(n);
+
+// State demo
+Console.WriteLine();
+Console.WriteLine("State pattern demo:");
+var doc = new Document("Initial");
+Console.WriteLine($"Document state: {doc.StateName}, content: {doc.Content}");
+
+doc.Edit("Draft content");
+Console.WriteLine($"After edit: state: {doc.StateName}, content: {doc.Content}");
+
+doc.Publish();
+Console.WriteLine($"After publish to moderation: state: {doc.StateName}");
+
+try
+{
+    doc.Edit("Attempted edit in moderation");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Edit in moderation throws: {ex.Message}");
+}
+
+doc.Publish();
+Console.WriteLine($"After publish to published: state: {doc.StateName}");
+
+// Edit published -> goes back to draft
+doc.Edit("Updated after published");
+Console.WriteLine($"After editing published: state: {doc.StateName}, content: {doc.Content}");
 
 // Memento demo
 Console.WriteLine();

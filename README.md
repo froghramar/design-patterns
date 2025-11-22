@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, Mediator, Observer, and Memento patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, Mediator, Observer, State, and Memento patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -21,6 +21,7 @@ Projects
   - Iterator implementation: `DesignPatterns/Iterator/*`
   - Mediator implementation: `DesignPatterns/Mediator/*`
   - Observer implementation: `DesignPatterns/Observer/*`
+  - State implementation: `DesignPatterns/State/*`
   - Memento implementation: `DesignPatterns/Memento/*`
 - `Tests` - xUnit tests covering the examples.
 
@@ -234,6 +235,20 @@ Included patterns and brief docs
     // subscribers receive messages in their Received collection
     ```
 
+- State Pattern
+  - Purpose: Allow an object to alter its behavior when its internal state changes. The object will appear to change its class.
+  - Example: `DesignPatterns/State/*` contains `Document` (context) and concrete states `DraftState`, `ModerationState`, and `PublishedState` implementing `IDocumentState`.
+  - Usage snippet:
+
+    ```csharp
+    var doc = new Document("Initial");
+    Console.WriteLine(doc.StateName); // Draft
+    doc.Edit("Draft content");
+    doc.Publish(); // moves to Moderation
+    doc.Publish(); // moves to Published
+    doc.Edit("Edit after published"); // moves back to Draft and updates content
+    ```
+
 - Memento Pattern
   - Purpose: Capture and externalize an object's internal state so it can be restored later without violating encapsulation.
   - Example: `DesignPatterns/Memento/*` contains `TextMemento`, `TextEditor` (originator), and `CareTaker` that stores mementos.
@@ -267,6 +282,7 @@ Tests
   - Iterator tests: `Tests/IteratorTests.cs`
   - Mediator tests: `Tests/MediatorTests.cs`
   - Observer tests: `Tests/ObserverTests.cs`
+  - State tests: `Tests/StateTests.cs`
   - Memento tests: `Tests/MementoTests.cs`
 
 Common commands
