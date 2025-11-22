@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, and Composite patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, and Decorator patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -12,6 +12,7 @@ Projects
   - Adapter implementation: `DesignPatterns/Adapter/*`
   - Bridge implementation: `DesignPatterns/Bridge/*`
   - Composite implementation: `DesignPatterns/Composite/*`
+  - Decorator implementation: `DesignPatterns/Decorator/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -106,6 +107,18 @@ Included patterns and brief docs
     Console.WriteLine(root.Draw()); // "Dot, Circle"
     ```
 
+- Decorator Pattern
+  - Purpose: Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.
+  - Example: `DesignPatterns/Decorator/*` contains `INotifier` and concrete decorators `SmsDecorator`, `SlackDecorator` wrapping `EmailNotifier`.
+  - Usage snippet:
+
+    ```csharp
+    INotifier notifier = new EmailNotifier();
+    notifier = new SmsDecorator(notifier);
+    notifier = new SlackDecorator(notifier);
+    Console.WriteLine(notifier.Notify("Hello"));
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -116,6 +129,7 @@ Tests
   - Adapter tests: `Tests/AdapterTests.cs`
   - Bridge tests: `Tests/BridgeTests.cs`
   - Composite tests: `Tests/CompositeTests.cs`
+  - Decorator tests: `Tests/DecoratorTests.cs`
 
 Requirements
 - .NET 10 SDK

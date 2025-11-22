@@ -6,6 +6,7 @@ using DesignPatterns.AbstractFactory;
 using DesignPatterns.Adapter;
 using DesignPatterns.Bridge;
 using DesignPatterns.Composite;
+using DesignPatterns.Decorator;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -91,6 +92,18 @@ child.Add(new Dot());
 nested.Add(child);
 nested.Add(new CircleGraphic());
 Console.WriteLine(nested.Draw());
+
+// Decorator demo
+Console.WriteLine();
+Console.WriteLine("Decorator pattern demo:");
+INotifier notifier = new EmailNotifier();
+Console.WriteLine(notifier.Notify("Hello"));
+
+notifier = new SmsDecorator(notifier);
+Console.WriteLine(notifier.Notify("Hello"));
+
+notifier = new SlackDecorator(notifier);
+Console.WriteLine(notifier.Notify("Hello"));
 
 // Singleton demo
 Logger.Instance.Clear();
