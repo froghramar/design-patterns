@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, and Flyweight patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, and Proxy patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -15,6 +15,7 @@ Projects
   - Decorator implementation: `DesignPatterns/Decorator/*`
   - Facade implementation: `DesignPatterns/Facade/*`
   - Flyweight implementation: `DesignPatterns/Flyweight/*`
+  - Proxy implementation: `DesignPatterns/Proxy/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -145,6 +146,17 @@ Included patterns and brief docs
     Console.WriteLine(TreeFactory.Count); // 1 or more depending on unique types
     ```
 
+- Proxy Pattern
+  - Purpose: Provide a surrogate or placeholder for another object to control access to it.
+  - Example: `DesignPatterns/Proxy/*` contains `IImage`, `RealImage`, and `ProxyImage` where `ProxyImage` defers loading of `RealImage` until needed.
+  - Usage snippet:
+
+    ```csharp
+    IImage img = new ProxyImage("photo.jpg");
+    img.Display(); // loads and displays
+    img.Display(); // reuses loaded image
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -158,6 +170,7 @@ Tests
   - Decorator tests: `Tests/DecoratorTests.cs`
   - Facade tests: `Tests/FacadeTests.cs`
   - Flyweight tests: `Tests/FlyweightTests.cs`
+  - Proxy tests: `Tests/ProxyTests.cs`
 
 Common commands
 - Build solution: `dotnet build`

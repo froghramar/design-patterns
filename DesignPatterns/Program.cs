@@ -9,6 +9,7 @@ using DesignPatterns.Composite;
 using DesignPatterns.Decorator;
 using DesignPatterns.Facade;
 using DesignPatterns.Flyweight;
+using DesignPatterns.Proxy;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -94,6 +95,7 @@ child.Add(new Dot());
 nested.Add(child);
 nested.Add(new CircleGraphic());
 Console.WriteLine(nested.Draw());
+;
 
 // Decorator demo
 Console.WriteLine();
@@ -140,6 +142,13 @@ Console.WriteLine(tree1.Draw());
 Console.WriteLine(tree2.Draw());
 Console.WriteLine(tree3.Draw());
 Console.WriteLine($"Shared types count: {TreeFactory.Count}");
+
+// Proxy demo
+Console.WriteLine();
+Console.WriteLine("Proxy pattern demo:");
+IImage img = new ProxyImage("photo.jpg");
+img.Display(); // loads and displays
+img.Display(); // reuses loaded image
 
 // Singleton demo
 Logger.Instance.Clear();
