@@ -14,6 +14,7 @@ using DesignPatterns.Chain;
 using DesignPatterns.Iterator;
 using DesignPatterns.Mediator;
 using DesignPatterns.Memento;
+using DesignPatterns.Observer;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -160,6 +161,22 @@ room.Register(bob);
 alice.Send("Hello Bob");
 Console.WriteLine("Bob's messages:");
 foreach (var msg in bob.Messages) Console.WriteLine(msg);
+
+// Observer demo
+Console.WriteLine();
+Console.WriteLine("Observer pattern demo:");
+var publisher = new NewsPublisher();
+var subA = new NewsSubscriber("SubA");
+var subB = new NewsSubscriber("SubB");
+publisher.Attach(subA);
+publisher.Attach(subB);
+
+publisher.Notify("Breaking: Observer demo");
+
+Console.WriteLine("SubA received:");
+foreach (var n in subA.Received) Console.WriteLine(n);
+Console.WriteLine("SubB received:");
+foreach (var n in subB.Received) Console.WriteLine(n);
 
 // Memento demo
 Console.WriteLine();

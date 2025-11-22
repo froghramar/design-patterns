@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, Mediator, and Memento patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, Mediator, Observer, and Memento patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -20,6 +20,7 @@ Projects
   - Command implementation: `DesignPatterns/Command/*`
   - Iterator implementation: `DesignPatterns/Iterator/*`
   - Mediator implementation: `DesignPatterns/Mediator/*`
+  - Observer implementation: `DesignPatterns/Observer/*`
   - Memento implementation: `DesignPatterns/Memento/*`
 - `Tests` - xUnit tests covering the examples.
 
@@ -218,6 +219,21 @@ Included patterns and brief docs
     alice.Send("Hello Bob");
     ```
 
+- Observer Pattern
+  - Purpose: Define a one-to-many dependency so that when one object (the subject) changes state, its dependents (observers) are notified automatically.
+  - Example: `DesignPatterns/Observer/*` contains `NewsPublisher` (subject) and `NewsSubscriber` (observer). The publisher holds subscribers and calls `Notify` to update them.
+  - Usage snippet:
+
+    ```csharp
+    var publisher = new NewsPublisher();
+    var subA = new NewsSubscriber("SubA");
+    var subB = new NewsSubscriber("SubB");
+    publisher.Attach(subA);
+    publisher.Attach(subB);
+    publisher.Notify("Breaking: Observer demo");
+    // subscribers receive messages in their Received collection
+    ```
+
 - Memento Pattern
   - Purpose: Capture and externalize an object's internal state so it can be restored later without violating encapsulation.
   - Example: `DesignPatterns/Memento/*` contains `TextMemento`, `TextEditor` (originator), and `CareTaker` that stores mementos.
@@ -250,6 +266,7 @@ Tests
   - Command tests: `Tests/CommandTests.cs`
   - Iterator tests: `Tests/IteratorTests.cs`
   - Mediator tests: `Tests/MediatorTests.cs`
+  - Observer tests: `Tests/ObserverTests.cs`
   - Memento tests: `Tests/MementoTests.cs`
 
 Common commands
