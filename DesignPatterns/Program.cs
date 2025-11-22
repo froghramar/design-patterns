@@ -11,6 +11,7 @@ using DesignPatterns.Facade;
 using DesignPatterns.Flyweight;
 using DesignPatterns.Proxy;
 using DesignPatterns.Chain;
+using DesignPatterns.Iterator;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -98,6 +99,18 @@ nested.Add(child);
 nested.Add(new CircleGraphic());
 Console.WriteLine(nested.Draw());
 
+// Iterator demo
+Console.WriteLine();
+Console.WriteLine("Iterator pattern demo:");
+var books = new BookCollection();
+books.Add(new Book("Title1", "Author1"));
+books.Add(new Book("Title2", "Author2"));
+
+var it = books.CreateIterator();
+while (it.HasNext())
+{
+    Console.WriteLine(it.Next());
+}
 
 // Chain of Responsibility demo
 Console.WriteLine();

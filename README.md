@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, and Command patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, and Iterator patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -18,6 +18,7 @@ Projects
   - Proxy implementation: `DesignPatterns/Proxy/*`
   - Chain of Responsibility implementation: `DesignPatterns/Chain/*`
   - Command implementation: `DesignPatterns/Command/*`
+  - Iterator implementation: `DesignPatterns/Iterator/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -188,6 +189,19 @@ Included patterns and brief docs
     remote.PressUndo();
     ```
 
+- Iterator Pattern
+  - Purpose: Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
+  - Example: `DesignPatterns/Iterator/*` contains `Book`, `BookCollection`, `BookIterator`, and interfaces `IBookCollection`, `IIterator`.
+  - Usage snippet:
+
+    ```csharp
+    var books = new BookCollection();
+    books.Add(new Book("Title1", "Author1"));
+    books.Add(new Book("Title2", "Author2"));
+    var it = books.CreateIterator();
+    while (it.HasNext()) Console.WriteLine(it.Next());
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -204,6 +218,7 @@ Tests
   - Proxy tests: `Tests/ProxyTests.cs`
   - Chain tests: `Tests/ChainTests.cs`
   - Command tests: `Tests/CommandTests.cs`
+  - Iterator tests: `Tests/IteratorTests.cs`
 
 Common commands
 - Build solution: `dotnet build`
