@@ -7,6 +7,7 @@ using DesignPatterns.Adapter;
 using DesignPatterns.Bridge;
 using DesignPatterns.Composite;
 using DesignPatterns.Decorator;
+using DesignPatterns.Facade;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -104,6 +105,24 @@ Console.WriteLine(notifier.Notify("Hello"));
 
 notifier = new SlackDecorator(notifier);
 Console.WriteLine(notifier.Notify("Hello"));
+
+// Facade demo
+Console.WriteLine();
+Console.WriteLine("Facade pattern demo:");
+var facade = new OrderFacade();
+if (facade.PlaceOrder("Bob", "Widget", 2, "1 Road", 9.99m, out var confirmation))
+{
+    Console.WriteLine("Order placed: " + confirmation);
+}
+else
+{
+    Console.WriteLine("Order failed");
+}
+
+if (!facade.PlaceOrder("Bob", "Widget", 999, "1 Road", 9.99m, out _))
+{
+    Console.WriteLine("Second order failed as expected (out of stock)");
+}
 
 // Singleton demo
 Logger.Instance.Clear();

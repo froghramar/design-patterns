@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, and Decorator patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, and Facade patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -13,6 +13,7 @@ Projects
   - Bridge implementation: `DesignPatterns/Bridge/*`
   - Composite implementation: `DesignPatterns/Composite/*`
   - Decorator implementation: `DesignPatterns/Decorator/*`
+  - Facade implementation: `DesignPatterns/Facade/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -119,6 +120,19 @@ Included patterns and brief docs
     Console.WriteLine(notifier.Notify("Hello"));
     ```
 
+- Facade Pattern
+  - Purpose: Provide a simplified interface to a complex subsystem.
+  - Example: `DesignPatterns/Facade/*` contains `OrderFacade` which orchestrates `Inventory`, `PaymentProcessor`, and `Shipping` subsystems to place orders.
+  - Usage snippet:
+
+    ```csharp
+    var facade = new OrderFacade();
+    if (facade.PlaceOrder("Bob", "Widget", 2, "1 Road", 9.99m, out var confirmation))
+    {
+        Console.WriteLine("Order placed: " + confirmation);
+    }
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -130,6 +144,7 @@ Tests
   - Bridge tests: `Tests/BridgeTests.cs`
   - Composite tests: `Tests/CompositeTests.cs`
   - Decorator tests: `Tests/DecoratorTests.cs`
+  - Facade tests: `Tests/FacadeTests.cs`
 
 Requirements
 - .NET 10 SDK
