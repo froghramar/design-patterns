@@ -1,5 +1,6 @@
 ﻿using DesignPatterns.Factories;
 using DesignPatterns.Singleton;
+using DesignPatterns.Builder;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -11,14 +12,24 @@ Console.WriteLine(circle.Draw());
 Console.WriteLine(square.Draw());
 Console.WriteLine(rect.Draw());
 
+// Builder demo
+var house = new HouseBuilder()
+    .WithRooms(3)
+    .WithWindows(5)
+    .WithGarage()
+    .AtAddress("123 Main St")
+    .Build();
+
+Console.WriteLine();
+Console.WriteLine("Builder pattern demo:");
+Console.WriteLine(house.ToString());
+
 // Singleton demo
 Logger.Instance.Clear();
-Logger.Instance.Log("Application started");
-Logger.Instance.Log(circle.Draw());
-Logger.Instance.Log(square.Draw());
-Logger.Instance.Log(rect.Draw());
-Logger.Instance.Log("Application finished");
+Logger.Instance.Log("Singleton started");
+Logger.Instance.Log("Singleton finished");
 
+Console.WriteLine();
 Console.WriteLine("Logged messages:");
 foreach (var msg in Logger.Instance.Messages)
 {
