@@ -3,11 +3,12 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, and Prototype patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, and Abstract Factory patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
   - Prototype implementation: `DesignPatterns/Prototype/Person.cs` and `DesignPatterns/Prototype/Address.cs`
+  - Abstract Factory implementation: `DesignPatterns/AbstractFactory/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -53,12 +54,26 @@ Included patterns and brief docs
     clone.Address.Street = "2 B Ave"; // does not affect original
     ```
 
+- Abstract Factory Pattern
+  - Purpose: Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
+  - Example: `DesignPatterns/AbstractFactory/*` contains `IFurnitureFactory`, `ModernFurnitureFactory`, `VictorianFurnitureFactory`, and product interfaces `IChair` and `ISofa`.
+  - Usage snippet:
+
+    ```csharp
+    var factory = FactoryProducer.GetFactory(FactoryProducer.Style.Modern);
+    var chair = factory.CreateChair();
+    var sofa = factory.CreateSofa();
+    Console.WriteLine(chair.Sit());
+    Console.WriteLine(sofa.LieDown());
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
   - Singleton tests: `Tests/SingletonTests.cs`
   - Builder tests: `Tests/BuilderTests.cs`
   - Prototype tests: `Tests/PrototypeTests.cs`
+  - Abstract Factory tests: `Tests/AbstractFactoryTests.cs`
 
 Requirements
 - .NET 10 SDK

@@ -2,6 +2,7 @@
 using DesignPatterns.Singleton;
 using DesignPatterns.Builder;
 using DesignPatterns.Prototype;
+using DesignPatterns.AbstractFactory;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -34,6 +35,21 @@ Console.WriteLine();
 Console.WriteLine("Prototype pattern demo:");
 Console.WriteLine($"Original: {person}");
 Console.WriteLine($"Clone:    {clone}");
+
+// Abstract Factory demo
+Console.WriteLine();
+Console.WriteLine("Abstract Factory pattern demo:");
+var modernFactory = FactoryProducer.GetFactory(FactoryProducer.Style.Modern);
+var modernChair = modernFactory.CreateChair();
+var modernSofa = modernFactory.CreateSofa();
+Console.WriteLine(modernChair.Sit());
+Console.WriteLine(modernSofa.LieDown());
+
+var victorianFactory = FactoryProducer.GetFactory(FactoryProducer.Style.Victorian);
+var victorianChair = victorianFactory.CreateChair();
+var victorianSofa = victorianFactory.CreateSofa();
+Console.WriteLine(victorianChair.Sit());
+Console.WriteLine(victorianSofa.LieDown());
 
 // Singleton demo
 Logger.Instance.Clear();
