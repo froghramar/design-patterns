@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, and Iterator patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, and Mediator patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -19,6 +19,7 @@ Projects
   - Chain of Responsibility implementation: `DesignPatterns/Chain/*`
   - Command implementation: `DesignPatterns/Command/*`
   - Iterator implementation: `DesignPatterns/Iterator/*`
+  - Mediator implementation: `DesignPatterns/Mediator/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -202,6 +203,20 @@ Included patterns and brief docs
     while (it.HasNext()) Console.WriteLine(it.Next());
     ```
 
+- Mediator Pattern
+  - Purpose: Define an object that encapsulates how a set of objects interact. Mediator promotes loose coupling by keeping objects from referring to each other explicitly.
+  - Example: `DesignPatterns/Mediator/*` contains `ChatRoom` (mediator) and `Participant` (colleagues) that register with the room and broadcast messages.
+  - Usage snippet:
+
+    ```csharp
+    var room = new ChatRoom();
+    var alice = new Participant("Alice");
+    var bob = new Participant("Bob");
+    room.Register(alice);
+    room.Register(bob);
+    alice.Send("Hello Bob");
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -219,6 +234,7 @@ Tests
   - Chain tests: `Tests/ChainTests.cs`
   - Command tests: `Tests/CommandTests.cs`
   - Iterator tests: `Tests/IteratorTests.cs`
+  - Mediator tests: `Tests/MediatorTests.cs`
 
 Common commands
 - Build solution: `dotnet build`

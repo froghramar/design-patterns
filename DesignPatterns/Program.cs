@@ -12,6 +12,7 @@ using DesignPatterns.Flyweight;
 using DesignPatterns.Proxy;
 using DesignPatterns.Chain;
 using DesignPatterns.Iterator;
+using DesignPatterns.Mediator;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -145,6 +146,19 @@ cmdRemote.SetCommand(lightOn);
 cmdRemote.PressButton();
 cmdRemote.PressUndo();
 Console.WriteLine($"After undo, light is on: {light.IsOn}");
+
+// Mediator demo
+Console.WriteLine();
+Console.WriteLine("Mediator pattern demo:");
+var room = new ChatRoom();
+var alice = new Participant("Alice");
+var bob = new Participant("Bob");
+room.Register(alice);
+room.Register(bob);
+
+alice.Send("Hello Bob");
+Console.WriteLine("Bob's messages:");
+foreach (var m in bob.Messages) Console.WriteLine(m);
 
 // Decorator demo
 Console.WriteLine();
