@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, and Facade patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, and Flyweight patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -14,6 +14,7 @@ Projects
   - Composite implementation: `DesignPatterns/Composite/*`
   - Decorator implementation: `DesignPatterns/Decorator/*`
   - Facade implementation: `DesignPatterns/Facade/*`
+  - Flyweight implementation: `DesignPatterns/Flyweight/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -133,6 +134,17 @@ Included patterns and brief docs
     }
     ```
 
+- Flyweight Pattern
+  - Purpose: Use sharing to support large numbers of fine-grained objects efficiently by separating intrinsic (shared) from extrinsic (unique) state.
+  - Example: `DesignPatterns/Flyweight/*` contains `TreeType`, `TreeFactory`, and `Tree` where `TreeType` is shared and reused by `TreeFactory`.
+  - Usage snippet:
+
+    ```csharp
+    var t1 = TreeFactory.GetTreeType("Oak", "Green", "Rough");
+    var t2 = TreeFactory.GetTreeType("Oak", "Green", "Rough");
+    Console.WriteLine(TreeFactory.Count); // 1 or more depending on unique types
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -145,9 +157,7 @@ Tests
   - Composite tests: `Tests/CompositeTests.cs`
   - Decorator tests: `Tests/DecoratorTests.cs`
   - Facade tests: `Tests/FacadeTests.cs`
-
-Requirements
-- .NET 10 SDK
+  - Flyweight tests: `Tests/FlyweightTests.cs`
 
 Common commands
 - Build solution: `dotnet build`

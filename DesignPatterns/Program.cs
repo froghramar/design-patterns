@@ -8,6 +8,7 @@ using DesignPatterns.Bridge;
 using DesignPatterns.Composite;
 using DesignPatterns.Decorator;
 using DesignPatterns.Facade;
+using DesignPatterns.Flyweight;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -123,6 +124,22 @@ if (!facade.PlaceOrder("Bob", "Widget", 999, "1 Road", 9.99m, out _))
 {
     Console.WriteLine("Second order failed as expected (out of stock)");
 }
+
+// Flyweight demo
+Console.WriteLine();
+Console.WriteLine("Flyweight pattern demo:");
+var t1 = TreeFactory.GetTreeType("Oak", "Green", "Rough");
+var t2 = TreeFactory.GetTreeType("Oak", "Green", "Rough");
+var t3 = TreeFactory.GetTreeType("Pine", "DarkGreen", "Smooth");
+
+var tree1 = new Tree(10, 20, t1);
+var tree2 = new Tree(15, 25, t2);
+var tree3 = new Tree(5, 5, t3);
+
+Console.WriteLine(tree1.Draw());
+Console.WriteLine(tree2.Draw());
+Console.WriteLine(tree3.Draw());
+Console.WriteLine($"Shared types count: {TreeFactory.Count}");
 
 // Singleton demo
 Logger.Instance.Clear();
