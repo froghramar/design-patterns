@@ -1,56 +1,40 @@
 Design Patterns Examples
 
-This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
+A concise introduction
+
+Design patterns provide proven solutions to common software design problems. They describe flexible, reusable approaches to structure classes and objects, improve code maintainability, and communicate design intent. This repository contains small, focused C# examples that demonstrate each pattern and how it can be used in practical code.
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, Mediator, Observer, State, Strategy, Template Method, Memento, and Visitor patterns.
-  - Factory implementation: `DesignPatterns/Factories`
-  - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
-  - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
-  - Prototype implementation: `DesignPatterns/Prototype/Person.cs` and `DesignPatterns/Prototype/Address.cs`
-  - Abstract Factory implementation: `DesignPatterns/AbstractFactory/*`
-  - Adapter implementation: `DesignPatterns/Adapter/*`
-  - Bridge implementation: `DesignPatterns/Bridge/*`
-  - Composite implementation: `DesignPatterns/Composite/*`
-  - Decorator implementation: `DesignPatterns/Decorator/*`
-  - Facade implementation: `DesignPatterns/Facade/*`
-  - Flyweight implementation: `DesignPatterns/Flyweight/*`
-  - Proxy implementation: `DesignPatterns/Proxy/*`
-  - Chain of Responsibility implementation: `DesignPatterns/Chain/*`
-  - Command implementation: `DesignPatterns/Command/*`
-  - Iterator implementation: `DesignPatterns/Iterator/*`
-  - Mediator implementation: `DesignPatterns/Mediator/*`
-  - Observer implementation: `DesignPatterns/Observer/*`
-  - State implementation: `DesignPatterns/State/*`
-  - Strategy implementation: `DesignPatterns/Strategy/*`
-  - Template Method implementation: `DesignPatterns/TemplateMethod/*`
-  - Memento implementation: `DesignPatterns/Memento/*`
-  - Visitor implementation: `DesignPatterns/Visitor/*`
+- `DesignPatterns` - Console demo showing multiple design patterns with minimal examples.
 - `Tests` - xUnit tests covering the examples.
 
-Included patterns and brief docs
+Pattern examples grouped by category
 
-- Factory Pattern
+Creational patterns
+- Factory
   - Purpose: Encapsulates object creation and returns different concrete implementations via a common interface.
-  - Example: `DesignPatterns/Factories/ShapeFactory.cs` creates `Circle`, `Square`, or `Rectangle` based on `ShapeType`.
+  - Example: `DesignPatterns/Factories/ShapeFactory.cs`
+  - Usage:
+    ```csharp
+    IShape s = ShapeFactory.CreateShape(ShapeType.Circle, 3.5);
+    Console.WriteLine(s.Draw());
+    ```
 
-- Singleton Pattern
+- Singleton
   - Purpose: Ensures a class has only one instance and provides a global point of access.
-  - Example: `DesignPatterns/Singleton/Logger.cs` — thread-safe singleton using `System.Lazy<T>` and `System.Collections.Concurrent.ConcurrentQueue<string>` to store log messages.
-  - Usage snippet:
-
+  - Example: `DesignPatterns/Singleton/Logger.cs`
+  - Usage:
     ```csharp
     var logger = Logger.Instance;
     logger.Clear();
-    logger.Log("Application started");
-    foreach (var msg in Logger.Instance.Messages) Console.WriteLine(msg);
+    logger.Log("Started");
+    foreach (var m in Logger.Instance.Messages) Console.WriteLine(m);
     ```
 
-- Builder Pattern
-  - Purpose: Separates the construction of a complex object from its representation, providing a fluent API for step-by-step creation.
-  - Example: `DesignPatterns/Builder/HouseBuilder.cs` builds immutable `House` instances from `DesignPatterns/Builder/House.cs`.
-  - Usage snippet:
-
+- Builder
+  - Purpose: Separates construction of a complex object from its representation, providing a fluent API.
+  - Example: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
+  - Usage:
     ```csharp
     var house = new HouseBuilder()
         .WithRooms(3)
@@ -58,149 +42,125 @@ Included patterns and brief docs
         .WithGarage()
         .AtAddress("123 Main St")
         .Build();
+    Console.WriteLine(house);
     ```
 
-- Prototype Pattern
-  - Purpose: Create new objects by copying existing ones (prototypes), which can be faster or simpler than constructing from scratch. Useful for creating deep copies or variations of an object.
-  - Example: `DesignPatterns/Prototype/Person.cs` and `DesignPatterns/Prototype/Address.cs`. `Person.Clone()` returns a deep copy of the `Person` including a cloned `Address`.
-  - Usage snippet:
-
+- Prototype
+  - Purpose: Create new objects by copying existing ones (useful for deep copies).
+  - Example: `DesignPatterns/Prototype/Person.cs` and `DesignPatterns/Prototype/Address.cs`
+  - Usage:
     ```csharp
-    var person = new Person("Alice", 30, new Address("1 A St", "Townsville"));
-    var clone = person.Clone();
-    clone.Address.Street = "2 B Ave"; // does not affect original
+    var p = new Person("Alice", 30, new Address("1 A St", "Townsville"));
+    var clone = p.Clone();
+    clone.Address.Street = "2 B Ave"; // original unaffected
     ```
 
-- Abstract Factory Pattern
-  - Purpose: Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
-  - Example: `DesignPatterns/AbstractFactory/*` contains `IFurnitureFactory`, `ModernFurnitureFactory`, `VictorianFurnitureFactory`, and product interfaces `IChair` and `ISofa`.
-  - Usage snippet:
-
+- Abstract Factory
+  - Purpose: Provide an interface for creating families of related objects without specifying concrete classes.
+  - Example: `DesignPatterns/AbstractFactory/*`
+  - Usage:
     ```csharp
-    var factory = FactoryProducer.GetFactory(FactoryProducer.Style.Modern);
-    var chair = factory.CreateChair();
-    var sofa = factory.CreateSofa();
-    Console.WriteLine(chair.Sit());
-    Console.WriteLine(sofa.LieDown());
+    var f = FactoryProducer.GetFactory(FactoryProducer.Style.Modern);
+    Console.WriteLine(f.CreateChair().Sit());
     ```
 
-- Adapter Pattern
-  - Purpose: Convert the interface of a class into another interface clients expect. Allows classes with incompatible interfaces to work together.
-  - Example: `DesignPatterns/Adapter/LegacyTextService.cs` is a legacy class exposing `Fetch()`. `DesignPatterns/Adapter/LegacyTextAdapter.cs` adapts it to the `ITextProvider` interface.
-  - Usage snippet:
-
+Structural patterns
+- Adapter
+  - Purpose: Convert the interface of a class into another interface clients expect.
+  - Example: `DesignPatterns/Adapter/*`
+  - Usage:
     ```csharp
     var legacy = new LegacyTextService();
-    ITextProvider provider = new LegacyTextAdapter(legacy);
-    Console.WriteLine(provider.GetText());
+    ITextProvider p = new LegacyTextAdapter(legacy);
+    Console.WriteLine(p.GetText());
     ```
 
-- Bridge Pattern
-  - Purpose: Decouple an abstraction from its implementation so the two can vary independently.
-  - Example: `DesignPatterns/Bridge/*` provides `IDevice` implementations (`Tv`, `Radio`) and abstractions (`RemoteControl`, `AdvancedRemote`).
-  - Usage snippet:
-
+- Bridge
+  - Purpose: Decouple an abstraction from its implementation so they can vary independently.
+  - Example: `DesignPatterns/Bridge/*`
+  - Usage:
     ```csharp
     var tv = new Tv();
     var remote = new RemoteControl(tv);
     remote.TogglePower();
-    remote.VolumeUp();
-    remote.SetChannel(10);
+    Console.WriteLine(tv.IsEnabled);
     ```
 
-- Composite Pattern
-  - Purpose: Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions uniformly.
-  - Example: `DesignPatterns/Composite/*` contains `IGraphic` (leaf `Dot`, `CircleGraphic`) and `CompositeGraphic` which aggregates children.
-  - Usage snippet:
-
+- Composite
+  - Purpose: Compose objects into tree structures to represent part–whole hierarchies.
+  - Example: `DesignPatterns/Composite/*`
+  - Usage:
     ```csharp
     var root = new CompositeGraphic();
     root.Add(new Dot());
     root.Add(new CircleGraphic());
-    Console.WriteLine(root.Draw()); // "Dot, Circle"
+    Console.WriteLine(root.Draw());
     ```
 
-- Decorator Pattern
-  - Purpose: Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.
-  - Example: `DesignPatterns/Decorator/*` contains `INotifier` and concrete decorators `SmsDecorator`, `SlackDecorator` wrapping `EmailNotifier`.
-  - Usage snippet:
-
+- Decorator
+  - Purpose: Attach additional responsibilities to an object dynamically.
+  - Example: `DesignPatterns/Decorator/*`
+  - Usage:
     ```csharp
-    INotifier notifier = new EmailNotifier();
-    notifier = new SmsDecorator(notifier);
-    notifier = new SlackDecorator(notifier);
-    Console.WriteLine(notifier.Notify("Hello"));
+    INotifier n = new EmailNotifier();
+    n = new SmsDecorator(n);
+    Console.WriteLine(n.Notify("Hi"));
     ```
 
-- Facade Pattern
+- Facade
   - Purpose: Provide a simplified interface to a complex subsystem.
-  - Example: `DesignPatterns/Facade/*` contains `OrderFacade` which orchestrates `Inventory`, `PaymentProcessor`, and `Shipping` subsystems to place orders.
-  - Usage snippet:
-
+  - Example: `DesignPatterns/Facade/*`
+  - Usage:
     ```csharp
     var facade = new OrderFacade();
-    if (facade.PlaceOrder("Bob", "Widget", 2, "1 Road", 9.99m, out var confirmation))
-    {
-        Console.WriteLine("Order placed: " + confirmation);
-    }
+    facade.PlaceOrder("Bob", "Widget", 1, "Addr", 9.99m, out var confirmation);
     ```
 
-- Flyweight Pattern
-  - Purpose: Use sharing to support large numbers of fine-grained objects efficiently by separating intrinsic (shared) from extrinsic (unique) state.
-  - Example: `DesignPatterns/Flyweight/*` contains `TreeType`, `TreeFactory`, and `Tree` where `TreeType` is shared and reused by `TreeFactory`.
-  - Usage snippet:
-
+- Flyweight
+  - Purpose: Use sharing to support large numbers of fine-grained objects efficiently.
+  - Example: `DesignPatterns/Flyweight/*`
+  - Usage:
     ```csharp
-    var t1 = TreeFactory.GetTreeType("Oak", "Green", "Rough");
-    var t2 = TreeFactory.GetTreeType("Oak", "Green", "Rough");
-    Console.WriteLine(TreeFactory.Count); // 1 or more depending on unique types
+    var t = TreeFactory.GetTreeType("Oak", "Green", "Rough");
+    var tree = new Tree(10, 20, t);
+    Console.WriteLine(tree.Draw());
     ```
 
-- Proxy Pattern
+- Proxy
   - Purpose: Provide a surrogate or placeholder for another object to control access to it.
-  - Example: `DesignPatterns/Proxy/*` contains `IImage`, `RealImage`, and `ProxyImage` where `ProxyImage` defers loading of `RealImage` until needed.
-  - Usage snippet:
-
+  - Example: `DesignPatterns/Proxy/*`
+  - Usage:
     ```csharp
     IImage img = new ProxyImage("photo.jpg");
-    img.Display(); // loads and displays
-    img.Display(); // reuses loaded image
+    img.Display();
     ```
 
-- Chain of Responsibility Pattern
-  - Purpose: Avoid coupling the sender of a request to its receiver by giving more than one object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it.
-  - Example: `DesignPatterns/Chain/*` contains handlers `LevelOneHandler`, `LevelTwoHandler`, and `DefaultHandler` that process requests of different levels.
-  - Usage snippet:
-
+Behavioral patterns
+- Chain of Responsibility
+  - Purpose: Pass a request along a chain of handlers until one handles it.
+  - Example: `DesignPatterns/Chain/*`
+  - Usage:
     ```csharp
     var h1 = new LevelOneHandler();
-    var h2 = new LevelTwoHandler();
-    var def = new DefaultHandler();
-    h1.SetNext(h2).SetNext(def);
-    Console.WriteLine(h1.Handle(new Request(1, "r1")));
-    Console.WriteLine(h1.Handle(new Request(2, "r2")));
-    Console.WriteLine(h1.Handle(new Request(99, "r3")));
+    h1.SetNext(new LevelTwoHandler()).SetNext(new DefaultHandler());
+    Console.WriteLine(h1.Handle(new Request(2, "req")));
     ```
 
-- Command Pattern
-  - Purpose: Encapsulate a request as an object, thereby letting you parameterize clients with queues, requests, and operations and support undoable operations.
-  - Example: `DesignPatterns/Command/*` contains `ICommand`, `Light`, `LightOnCommand`, `LightOffCommand`, and `RemoteControl` (invoker).
-  - Usage snippet:
-
+- Command
+  - Purpose: Encapsulate a request as an object to parameterize clients and support undo.
+  - Example: `DesignPatterns/Command/*`
+  - Usage:
     ```csharp
-    var light = new Light();
-    var on = new LightOnCommand(light);
-    var remote = new RemoteControl();
-    remote.SetCommand(on);
-    remote.PressButton();
-    remote.PressUndo();
+    var light = new DesignPatterns.Command.Light();
+    var on = new DesignPatterns.Command.LightOnCommand(light);
+    var r = new DesignPatterns.Command.RemoteControl();
+    r.SetCommand(on); r.PressButton();
     ```
 
-- Iterator Pattern
-  - Purpose: Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
-  - Example: `DesignPatterns/Iterator/*` contains `Book`, `BookCollection`, `BookIterator`, and interfaces `IBookCollection`, `IIterator`.
-  - Usage snippet:
-
+- Iterator
+  - Purpose: Provide a way to access elements of an aggregate sequentially without exposing its structure.
+  - Example: `DesignPatterns/Iterator/*`
+  - Usage:
     ```csharp
     var books = new BookCollection();
     books.Add(new Book("Title1", "Author1"));
@@ -209,133 +169,82 @@ Included patterns and brief docs
     while (it.HasNext()) Console.WriteLine(it.Next());
     ```
 
-- Mediator Pattern
-  - Purpose: Define an object that encapsulates how a set of objects interact. Mediator promotes loose coupling by keeping objects from referring to each other explicitly.
-  - Example: `DesignPatterns/Mediator/*` contains `ChatRoom` (mediator) and `Participant` (colleagues) that register with the room and broadcast messages.
-  - Usage snippet:
-
+- Mediator
+  - Purpose: Encapsulate how a set of objects interact to reduce direct dependencies.
+  - Example: `DesignPatterns/Mediator/*`
+  - Usage:
     ```csharp
     var room = new ChatRoom();
-    var alice = new Participant("Alice");
-    var bob = new Participant("Bob");
-    room.Register(alice);
-    room.Register(bob);
-    alice.Send("Hello Bob");
+    var a = new Participant("A");
+    var b = new Participant("B");
+    room.Register(a); room.Register(b);
+    a.Send("hello");
     ```
 
-- Observer Pattern
-  - Purpose: Define a one-to-many dependency so that when one object (the subject) changes state, its dependents (observers) are notified automatically.
-  - Example: `DesignPatterns/Observer/*` contains `NewsPublisher` (subject) and `NewsSubscriber` (observer). The publisher holds subscribers and calls `Notify` to update them.
-  - Usage snippet:
-
+- Observer
+  - Purpose: Define a one-to-many dependency so observers are notified when a subject changes.
+  - Example: `DesignPatterns/Observer/*`
+  - Usage:
     ```csharp
-    var publisher = new NewsPublisher();
-    var subA = new NewsSubscriber("SubA");
-    var subB = new NewsSubscriber("SubB");
-    publisher.Attach(subA);
-    publisher.Attach(subB);
-    publisher.Notify("Breaking: Observer demo");
-    // subscribers receive messages in their Received collection
+    var pub = new NewsPublisher();
+    var s = new NewsSubscriber("S");
+    pub.Attach(s); pub.Notify("news");
     ```
 
-- State Pattern
-  - Purpose: Allow an object to alter its behavior when its internal state changes. The object will appear to change its class.
-  - Example: `DesignPatterns/State/*` contains `Document` (context) and concrete states `DraftState`, `ModerationState`, and `PublishedState` implementing `IDocumentState`.
-  - Usage snippet:
-
+- State
+  - Purpose: Allow an object to alter its behavior when its internal state changes.
+  - Example: `DesignPatterns/State/*`
+  - Usage:
     ```csharp
     var doc = new Document("Initial");
-    Console.WriteLine(doc.StateName); // Draft
-    doc.Edit("Draft content");
-    doc.Publish(); // moves to Moderation
-    doc.Publish(); // moves to Published
-    doc.Edit("Edit after published"); // moves back to Draft and updates content
+    doc.Edit("content"); doc.Publish();
     ```
 
-- Strategy Pattern
-  - Purpose: Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
-  - Example: `DesignPatterns/Strategy/*` contains `ISortStrategy`, concrete strategies `BubbleSortStrategy`, `QuickSortStrategy`, and `Sorter` that switches strategies at runtime.
-  - Usage snippet:
-
+- Strategy
+  - Purpose: Define a family of algorithms and make them interchangeable.
+  - Example: `DesignPatterns/Strategy/*`
+  - Usage:
     ```csharp
-    var data = new[] { 5, 3, 8, 1, 4 };
     var sorter = new Sorter(new BubbleSortStrategy());
     var sorted = sorter.Sort(data);
     sorter.SetStrategy(new QuickSortStrategy());
     sorted = sorter.Sort(data);
     ```
 
-- Memento Pattern
-  - Purpose: Capture and externalize an object's internal state so it can be restored later without violating encapsulation.
-  - Example: `DesignPatterns/Memento/*` contains `TextMemento`, `TextEditor` (originator), and `CareTaker` that stores mementos.
-  - Usage snippet:
-
+- Template Method
+  - Purpose: Define the skeleton of an algorithm in a base class and let subclasses override steps.
+  - Example: `DesignPatterns/TemplateMethod/*`
+  - Usage:
     ```csharp
-    var editor = new TextEditor();
-    var caretaker = new CareTaker();
-    editor.Type("Hello");
-    caretaker.SaveState(editor.Save());
-    editor.Type(" World");
-    editor.Restore(caretaker.PopState());
+    var r = new SalesReport(); Console.WriteLine(r.GenerateReport());
     ```
 
-- Template Method Pattern
-  - Purpose: Define the skeleton of an algorithm in a base class and let subclasses override specific steps without changing the algorithm's structure.
-  - Example: `DesignPatterns/TemplateMethod/*` contains `Report` (base class) and concrete reports `SalesReport` and `InventoryReport` that implement the specific steps.
-  - Usage snippet:
-
+- Memento
+  - Purpose: Capture and externalize an object's internal state so it can be restored later.
+  - Example: `DesignPatterns/Memento/*`
+  - Usage:
     ```csharp
-    var sales = new SalesReport();
-    Console.WriteLine(sales.GenerateReport());
-
-    var inv = new InventoryReport();
-    Console.WriteLine(inv.GenerateReport());
+    var editor = new TextEditor(); var c = new CareTaker();
+    editor.Type("Hi"); c.SaveState(editor.Save());
     ```
 
-- Visitor Pattern
-  - Purpose: Let you define a new operation without changing the classes of the elements on which it operates. Visitor separates an algorithm from the object structure it operates on.
-  - Example: `DesignPatterns/Visitor/*` contains `IVisitor`, element types `ElementA`, `ElementB`, a `ConcreteVisitor` that logs visits, and `ObjectStructure` which holds elements and accepts a visitor.
-  - Usage snippet:
-
+- Visitor
+  - Purpose: Define a new operation without changing the classes of the elements on which it operates.
+  - Example: `DesignPatterns/Visitor/*`
+  - Usage:
     ```csharp
-    var structure = new ObjectStructure();
-    structure.Add(new ElementA("alpha"));
-    structure.Add(new ElementB(42));
-    var visitor = new ConcreteVisitor();
-    structure.Accept(visitor);
-    Console.WriteLine(string.Join("\n", visitor.Log));
+    var s = new ObjectStructure(); s.Add(new ElementA("a"));
+    var v = new ConcreteVisitor(); s.Accept(v); Console.WriteLine(string.Join("\n", v.Log));
     ```
 
-Tests
-- Tests are written with xUnit in the `Tests` project.
-  - Factory tests: `Tests/ShapeFactoryTests.cs`
-  - Singleton tests: `Tests/SingletonTests.cs`
-  - Builder tests: `Tests/BuilderTests.cs`
-  - Prototype tests: `Tests/PrototypeTests.cs`
-  - Abstract Factory tests: `Tests/AbstractFactoryTests.cs`
-  - Adapter tests: `Tests/AdapterTests.cs`
-  - Bridge tests: `Tests/BridgeTests.cs`
-  - Composite tests: `Tests/CompositeTests.cs`
-  - Decorator tests: `Tests/DecoratorTests.cs`
-  - Facade tests: `Tests/FacadeTests.cs`
-  - Flyweight tests: `Tests/FlyweightTests.cs`
-  - Proxy tests: `Tests/ProxyTests.cs`
-  - Chain tests: `Tests/ChainTests.cs`
-  - Command tests: `Tests/CommandTests.cs`
-  - Iterator tests: `Tests/IteratorTests.cs`
-  - Mediator tests: `Tests/MediatorTests.cs`
-  - Observer tests: `Tests/ObserverTests.cs`
-  - State tests: `Tests/StateTests.cs`
-  - Strategy tests: `Tests/StrategyTests.cs`
-  - Memento tests: `Tests/MementoTests.cs`
-  - Template Method tests: `Tests/TemplateMethodTests.cs`
-  - Visitor tests: `Tests/VisitorTests.cs`
-
-Common commands
+Quick start
 - Build solution: `dotnet build`
 - Run console demo: `dotnet run --project DesignPatterns`
 - Run tests: `dotnet test`
 
+Tests
+- Tests are written with xUnit in the `Tests` project and cover the pattern examples (e.g., `Tests/VisitorTests.cs`).
+
 Notes
-- The examples are intentionally small to demonstrate the patterns and are suitable as learning references.
-- The `Logger` singleton is implemented to be safe for concurrent use in tests and examples.
+- The examples are intentionally small for learning and demonstration.
+- Projects target .NET 10 / C# 14.
