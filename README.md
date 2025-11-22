@@ -3,7 +3,7 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, and Mediator patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy, Chain of Responsibility, Command, Iterator, Mediator, and Memento patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
@@ -20,6 +20,7 @@ Projects
   - Command implementation: `DesignPatterns/Command/*`
   - Iterator implementation: `DesignPatterns/Iterator/*`
   - Mediator implementation: `DesignPatterns/Mediator/*`
+  - Memento implementation: `DesignPatterns/Memento/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -217,6 +218,20 @@ Included patterns and brief docs
     alice.Send("Hello Bob");
     ```
 
+- Memento Pattern
+  - Purpose: Capture and externalize an object's internal state so it can be restored later without violating encapsulation.
+  - Example: `DesignPatterns/Memento/*` contains `TextMemento`, `TextEditor` (originator), and `CareTaker` that stores mementos.
+  - Usage snippet:
+
+    ```csharp
+    var editor = new TextEditor();
+    var caretaker = new CareTaker();
+    editor.Type("Hello");
+    caretaker.SaveState(editor.Save());
+    editor.Type(" World");
+    editor.Restore(caretaker.PopState());
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -235,6 +250,7 @@ Tests
   - Command tests: `Tests/CommandTests.cs`
   - Iterator tests: `Tests/IteratorTests.cs`
   - Mediator tests: `Tests/MediatorTests.cs`
+  - Memento tests: `Tests/MementoTests.cs`
 
 Common commands
 - Build solution: `dotnet build`

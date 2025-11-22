@@ -13,6 +13,7 @@ using DesignPatterns.Proxy;
 using DesignPatterns.Chain;
 using DesignPatterns.Iterator;
 using DesignPatterns.Mediator;
+using DesignPatterns.Memento;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -158,7 +159,23 @@ room.Register(bob);
 
 alice.Send("Hello Bob");
 Console.WriteLine("Bob's messages:");
-foreach (var m in bob.Messages) Console.WriteLine(m);
+foreach (var msg in bob.Messages) Console.WriteLine(msg);
+
+// Memento demo
+Console.WriteLine();
+Console.WriteLine("Memento pattern demo:");
+var editor = new TextEditor();
+var caretaker = new CareTaker();
+
+editor.Type("Hello");
+caretaker.SaveState(editor.Save());
+
+editor.Type(" World");
+Console.WriteLine($"Current text: {editor.Text}");
+
+var m = caretaker.PopState();
+if (m != null) editor.Restore(m);
+Console.WriteLine($"Restored text: {editor.Text}");
 
 // Decorator demo
 Console.WriteLine();
