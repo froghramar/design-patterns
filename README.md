@@ -3,12 +3,13 @@ Design Patterns Examples
 This solution demonstrates simple design pattern examples in C# targeting .NET 10 (C# 14).
 
 Projects
-- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, and Abstract Factory patterns.
+- `DesignPatterns` - Console demo showing Factory, Singleton, Builder, Prototype, Abstract Factory, and Adapter patterns.
   - Factory implementation: `DesignPatterns/Factories`
   - Singleton implementation: `DesignPatterns/Singleton/Logger.cs`
   - Builder implementation: `DesignPatterns/Builder/HouseBuilder.cs` and `DesignPatterns/Builder/House.cs`
   - Prototype implementation: `DesignPatterns/Prototype/Person.cs` and `DesignPatterns/Prototype/Address.cs`
   - Abstract Factory implementation: `DesignPatterns/AbstractFactory/*`
+  - Adapter implementation: `DesignPatterns/Adapter/*`
 - `Tests` - xUnit tests covering the examples.
 
 Included patterns and brief docs
@@ -67,6 +68,17 @@ Included patterns and brief docs
     Console.WriteLine(sofa.LieDown());
     ```
 
+- Adapter Pattern
+  - Purpose: Convert the interface of a class into another interface clients expect. Allows classes with incompatible interfaces to work together.
+  - Example: `DesignPatterns/Adapter/LegacyTextService.cs` is a legacy class exposing `Fetch()`. `DesignPatterns/Adapter/LegacyTextAdapter.cs` adapts it to the `ITextProvider` interface.
+  - Usage snippet:
+
+    ```csharp
+    var legacy = new LegacyTextService();
+    ITextProvider provider = new LegacyTextAdapter(legacy);
+    Console.WriteLine(provider.GetText());
+    ```
+
 Tests
 - Tests are written with xUnit in the `Tests` project.
   - Factory tests: `Tests/ShapeFactoryTests.cs`
@@ -74,6 +86,7 @@ Tests
   - Builder tests: `Tests/BuilderTests.cs`
   - Prototype tests: `Tests/PrototypeTests.cs`
   - Abstract Factory tests: `Tests/AbstractFactoryTests.cs`
+  - Adapter tests: `Tests/AdapterTests.cs`
 
 Requirements
 - .NET 10 SDK

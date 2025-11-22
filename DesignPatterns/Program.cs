@@ -3,6 +3,7 @@ using DesignPatterns.Singleton;
 using DesignPatterns.Builder;
 using DesignPatterns.Prototype;
 using DesignPatterns.AbstractFactory;
+using DesignPatterns.Adapter;
 
 Console.WriteLine("Factory pattern demo:");
 
@@ -50,6 +51,13 @@ var victorianChair = victorianFactory.CreateChair();
 var victorianSofa = victorianFactory.CreateSofa();
 Console.WriteLine(victorianChair.Sit());
 Console.WriteLine(victorianSofa.LieDown());
+
+// Adapter demo
+Console.WriteLine();
+Console.WriteLine("Adapter pattern demo:");
+var legacy = new LegacyTextService();
+ITextProvider provider = new LegacyTextAdapter(legacy);
+Console.WriteLine(provider.GetText());
 
 // Singleton demo
 Logger.Instance.Clear();
